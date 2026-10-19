@@ -1,9 +1,25 @@
 <!doctype html>
-<html lang="uz">
+<html lang="uz" class="locked">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Umar Tursunov</title>
+<script>
+  function enterSite() {
+    var g = document.getElementById('gate');
+    if (!g || g.className.indexOf('filling') > -1) return;
+    var b = document.getElementById('enter');
+    if (b) b.disabled = true;
+    g.className += ' filling';
+    setTimeout(function () {
+      g.className += ' done';
+      var r = document.documentElement;
+      r.className = r.className.replace('locked', '').replace(/\s+$/, '');
+      try { window.scrollTo(0, 0); } catch (e) {}
+    }, 2900);
+  }
+</script>
+<noscript><style>.gate{display:none!important}html.locked,html.locked body{overflow:auto!important}</style></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -188,7 +204,7 @@
   /* entrance screen: the UT mark fills with water over 2.5 seconds on black */
   html.locked, html.locked body { overflow: hidden; }
   .gate {
-    position: fixed; inset: 0; z-index: 100;
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100;
     display: flex; align-items: center; justify-content: center;
     background: #000; color: #fff;
     padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
@@ -198,11 +214,11 @@
   .gate-inner { display: flex; flex-direction: column; align-items: center; gap: 48px; }
   .emblem {
     position: relative; overflow: hidden;
-    width: min(62vw, 300px); aspect-ratio: 1 / 1;
+    width: min(62vw, 300px); height: min(62vw, 300px);
     -webkit-mask: var(--logo) center / contain no-repeat;
     mask: var(--logo) center / contain no-repeat;
   }
-  .emblem-dim { position: absolute; inset: 0; background: rgba(255, 255, 255, .15); }
+  .emblem-dim { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(255, 255, 255, .15); }
   .water {
     position: absolute; left: 0; top: 0; width: 100%; height: 100%;
     background: linear-gradient(#fff 0%, #f1f1f1 45%, #c9c9c9 100%);
@@ -245,7 +261,7 @@
       <div class="emblem-dim"></div>
       <div class="water"><i class="wave w2"></i><i class="wave w1"></i></div>
     </div>
-    <button class="enter" id="enter" type="button">Portfolioga kirish →</button>
+    <button class="enter" id="enter" type="button" onclick="enterSite()">Portfolioga kirish →</button>
   </div>
 </div>
 
@@ -266,4 +282,71 @@
         <div class="actions mono">
           <a class="btn solid" href="#loyihalar">Loyihalarni ko‘rish ↓</a>
         </div>
-      
+      </div>
+    </div>
+
+    <section id="loyihalar" aria-labelledby="h-loyihalar">
+      <div class="sec-head">
+        <h2 id="h-loyihalar">Loyihalar</h2>
+        <span class="mono">3 ta · hammasi onlayn ishlaydi</span>
+      </div>
+      <div class="projects">
+        <a class="project" href="https://tursunovumar344-debug.github.io/Ilmix/" target="_blank" rel="noopener">
+          <span class="cat mono">O‘yin · Ta’lim</span>
+          <h3 class="name">Tez Hisobla <span class="arr" aria-hidden="true">↗</span></h3>
+          <div>
+            <p class="desc">Tez hisoblash o‘yini. Oson, normal va qiyin darajalarda 2 va 3 xonali sonlar beriladi, har bir misolga 10, 7 yoki 5 soniya vaqt bor. Ball, to‘g‘ri va xato javoblar hisoblanadi, eng yuqori natija ko‘rsatiladi.</p>
+            <ul class="tags mono"><li>3 daraja</li><li>Taymer</li><li>Rekord</li></ul>
+            <span class="view mono">Loyihani ko‘rish ↗</span>
+          </div>
+        </a>
+        <a class="project" href="https://tursunovumar344-debug.github.io/-TarjimaPro/" target="_blank" rel="noopener">
+          <span class="cat mono">Do‘kon hisobi</span>
+          <h3 class="name">Accessory Pro <span class="arr" aria-hidden="true">↗</span></h3>
+          <div>
+            <p class="desc">Aksessuar do‘koni uchun boshqaruv ilovasi. Mahsulot kirimi, ombor qoldig‘i, sotuv, bugungi savdo va foyda, oxirgi 7 kunlik hisobot, sotuvlar tarixi va ma’lumotlarni zaxiralash bir joyda.</p>
+            <ul class="tags mono"><li>Ombor</li><li>Sotuv</li><li>Hisobot</li><li>Backup</li></ul>
+            <span class="view mono">Loyihani ko‘rish ↗</span>
+          </div>
+        </a>
+        <a class="project" href="https://tursunovumar344-debug.github.io/somsaxona/" target="_blank" rel="noopener">
+          <span class="cat mono">Restoran hisobi</span>
+          <h3 class="name">Abdurazzoq Somsa <span class="arr" aria-hidden="true">↗</span></h3>
+          <div>
+            <p class="desc">Somsaxona uchun stol, tandir va menyu boshqaruvi. Har bir stolga zakaz qo‘shiladi va hisob yopiladi, tandirga yopilgan mol va qo‘y go‘shtli somsa soni yuritiladi, kunlik hisobot chiqadi.</p>
+            <ul class="tags mono"><li>Stollar</li><li>Tandir</li><li>Menyu</li><li>Hisobot</li></ul>
+            <span class="view mono">Loyihani ko‘rish ↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-qilaman">
+      <div class="sec-head">
+        <h2 id="h-qilaman">Nima qilaman</h2>
+      </div>
+      <div class="do">
+        <div>
+          <h3>Veb-ilovalar</h3>
+          <p>Brauzerda ochiladigan, o‘rnatish talab qilmaydigan ilovalar: o‘yin, hisob-kitob va boshqaruv paneli.</p>
+        </div>
+        <div>
+          <h3>Biznes uchun hisob</h3>
+          <p>Do‘kon va somsaxona kabi joylarda sotuv, ombor va hisobotni bitta oddiy ekranga jamlayman.</p>
+        </div>
+        <div>
+          <h3>Telefonda qulay</h3>
+          <p>Katta tugmalar, pastki menyu va rasmni kameradan qo‘shish: ilova kichik ekranda ham ishlashga qulay.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mono">
+    <span>© 2026 Umar Tursunov</span>
+    <a href="#top">Yuqoriga ↑</a>
+  </footer>
+</div>
+
+</body>
+</html>
